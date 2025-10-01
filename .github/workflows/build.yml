@@ -48,8 +48,12 @@ jobs:
           else
             make teste2e-covdata
           fi
+          go tool cover -html test/e2e/coverage.txt -o coverage.html
         env:
           ORAS_PATH: bin/linux/amd64/oras
+      - uses: actions/upload-artifact@v4
+        with:
+          path: coverage.html
       - name: Check Version
         run: bin/linux/amd64/oras version
       - name: Upload coverage to codecov.io
